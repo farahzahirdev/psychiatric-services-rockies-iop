@@ -4,6 +4,7 @@ import {
   ABOUT_SECTION_ID,
   ADDRESS_LINES,
   DETAILS_SECTION_ID,
+  FAQ_SECTION_ID,
   FIT_SECTION_ID,
   FORM_SECTION_ID,
   LOGO_LIGHT,
@@ -67,6 +68,9 @@ export default function Footer() {
             </a>
             <a href={`#${DETAILS_SECTION_ID}`} className="transition-colors hover:text-white">
               Schedule &amp; Location
+            </a>
+            <a href={`#${FAQ_SECTION_ID}`} className="transition-colors hover:text-white">
+              FAQ
             </a>
             <a href={`#${FORM_SECTION_ID}`} className="transition-colors hover:text-white">
               Request Information

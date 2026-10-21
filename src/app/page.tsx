@@ -3,6 +3,7 @@ import WhatIsIop from "@/components/WhatIsIop";
 import WhoItsFor from "@/components/WhoItsFor";
 import Approach from "@/components/Approach";
 import ProgramDetails from "@/components/ProgramDetails";
+import Faq from "@/components/Faq";
 import FinalCta from "@/components/FinalCta";
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
       <WhoItsFor />
       <Approach />
       <ProgramDetails />
+      <Faq />
       <FinalCta />
     </>
   );
