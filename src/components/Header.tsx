@@ -91,7 +91,7 @@ export default function Header() {
             <FocusFormButton
               formId="hero-lead-form"
               sectionId={FORM_SECTION_ID}
-              className="btn btn-primary !px-5 !py-2.5 !text-sm"
+              className="btn btn-primary !px-5 !py-2.5"
             >
               Get Started
             </FocusFormButton>
