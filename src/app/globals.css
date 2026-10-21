@@ -323,6 +323,10 @@ li {
   inset: 0;
 }
 
+.psr-hero-bg {
+  overflow: hidden;
+}
+
 .psr-hero-img {
   object-fit: cover;
   object-position: 55% 40%;
@@ -334,6 +338,8 @@ li {
 .psr-hero-veil {
   z-index: 1;
   pointer-events: none;
+  /* Slight overscan so scroll/focus never leaves a bright strip at the edges */
+  inset: -2px;
   background:
     linear-gradient(
       95deg,
