@@ -307,7 +307,7 @@ li {
   display: flex;
   overflow: hidden;
   border-radius: 0;
-  min-height: min(100svh, 860px);
+  min-height: min(92svh, 780px);
 }
 
 .psr-hero-bg,
@@ -386,7 +386,7 @@ li {
 
   .psr-hero-inner {
     align-items: flex-end;
-    padding: 7.5rem 0 7rem;
+    padding: 6rem 0 4.25rem;
   }
 }
 
