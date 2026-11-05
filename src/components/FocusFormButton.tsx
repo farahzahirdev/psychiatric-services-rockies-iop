@@ -1,7 +1,7 @@
 "use client";
 
 const NAV_CLEARANCE = 120;
-/** Keep the form nudge gentle so headings stay put on mobile + desktop. */
+/** Keep the form nudge gentle so headings stay put when the form is already on screen. */
 const SLIGHT_SCROLL_MAX = 96;
 
 function isFormMostlyVisible(form: HTMLElement) {
@@ -21,17 +21,14 @@ function slightScrollToForm(form: HTMLElement, section: HTMLElement | null) {
   const idealTop = Math.max(NAV_CLEARANCE + 20, vh * 0.34);
   let delta = formTop - idealTop;
 
-  // Cap to a slight move.
   delta = Math.max(-SLIGHT_SCROLL_MAX, Math.min(SLIGHT_SCROLL_MAX, delta));
 
-  // Never let the section top go above the sticky nav.
   if (section) {
     const sectionTop = section.getBoundingClientRect().top;
     const maxDown = sectionTop - NAV_CLEARANCE;
     if (delta > maxDown) delta = maxDown;
   }
 
-  // If already aligned, still ease a few pixels toward the form when safe.
   if (Math.abs(delta) < 8) {
     let tiny = 28;
     if (section) {
@@ -44,6 +41,13 @@ function slightScrollToForm(form: HTMLElement, section: HTMLElement | null) {
   if (Math.abs(delta) >= 8) {
     window.scrollBy({ top: delta, behavior: "smooth" });
   }
+}
+
+/** Scroll so the form sits just below the sticky nav. */
+function scrollToForm(form: HTMLElement) {
+  const top =
+    form.getBoundingClientRect().top + window.scrollY - NAV_CLEARANCE;
+  window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
 }
 
 function pulseAttention(el: HTMLElement) {
@@ -75,22 +79,19 @@ export default function FocusFormButton({
 
         const section = document.getElementById(sectionId);
         const form = document.getElementById(formId);
-        const scrollTarget = (section ?? form) as HTMLElement | null;
         const attentionTarget = (form ?? section) as HTMLElement | null;
 
         if (form && isFormMostlyVisible(form)) {
-          // Form already on screen — slight scroll + pulse (heading stays clear).
+          // Already on screen — slight nudge + pulse (don't yank the heading away).
           slightScrollToForm(form, section);
-        } else if (scrollTarget) {
-          // Coming from elsewhere — section first so the heading clears the nav,
-          // then a slight form nudge after the smooth scroll settles.
-          scrollTarget.scrollIntoView({
+        } else if (form) {
+          // Request More Info / Get Started from elsewhere — go to the form.
+          scrollToForm(form);
+        } else if (section) {
+          section.scrollIntoView({
             behavior: "smooth",
             block: "start",
           });
-          if (form) {
-            window.setTimeout(() => slightScrollToForm(form, section), 420);
-          }
         }
 
         if (attentionTarget) {
