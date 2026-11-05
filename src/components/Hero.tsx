@@ -52,7 +52,7 @@ export default function Hero() {
                   </div>
                 </div>
 
-                <div className="psr-hero-form-wrap psr-fade-up" style={{ animationDelay: "120ms" }}>
+                <div className="psr-hero-form-wrap">
                   <GhlLeadForm
                     id="hero-lead-form"
                     iframeId="inline-3nzZ5tLz1y1783JfTnfU-hero"

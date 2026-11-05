@@ -1,4 +1,8 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import { GHL_FORM } from "@/lib/constants";
+import { bindGhlIframe } from "@/lib/ghlEmbed";
 
 export default function GhlLeadForm({
   id,
@@ -7,10 +11,19 @@ export default function GhlLeadForm({
   id: string;
   iframeId: string;
 }) {
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  useEffect(() => {
+    const iframe = iframeRef.current;
+    if (!iframe) return;
+    return bindGhlIframe(iframe);
+  }, []);
+
   return (
     <div id={id} className="ghl-lead-form">
       <div className="ghl-lead-form-card">
         <iframe
+          ref={iframeRef}
           src={GHL_FORM.src}
           id={iframeId}
           title={GHL_FORM.title}
