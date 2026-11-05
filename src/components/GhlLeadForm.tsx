@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { GHL_FORM } from "@/lib/constants";
 import { bindGhlIframe } from "@/lib/ghlEmbed";
 
@@ -12,16 +12,28 @@ export default function GhlLeadForm({
   iframeId: string;
 }) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const iframe = iframeRef.current;
     if (!iframe) return;
-    return bindGhlIframe(iframe);
+    return bindGhlIframe(iframe, {
+      onReady: () => setReady(true),
+    });
   }, []);
 
   return (
-    <div id={id} className="ghl-lead-form">
+    <div id={id} className={`ghl-lead-form${ready ? " is-ready" : " is-loading"}`}>
       <div className="ghl-lead-form-card">
+        <div
+          className="ghl-lead-form-loader"
+          aria-live="polite"
+          aria-busy={!ready}
+          aria-hidden={ready}
+        >
+          <span className="ghl-lead-form-spinner" aria-hidden />
+          <span className="ghl-lead-form-loader-text">Loading form…</span>
+        </div>
         <iframe
           ref={iframeRef}
           src={GHL_FORM.src}
