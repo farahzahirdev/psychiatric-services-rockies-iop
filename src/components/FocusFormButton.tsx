@@ -1,15 +1,15 @@
 "use client";
 
-/** True when the element is fully usable under the sticky nav. */
+/** True when the section heading area is usable under the sticky nav. */
 function isComfortablyInView(el: HTMLElement) {
   const rect = el.getBoundingClientRect();
   const vh = window.innerHeight || document.documentElement.clientHeight;
-  const topClearance = 100;
-  const bottomClearance = 24;
+  const topClearance = 110;
   return (
     rect.top >= topClearance &&
-    rect.bottom <= vh - bottomClearance &&
-    rect.height > 0
+    rect.top < vh * 0.55 &&
+    rect.height > 0 &&
+    rect.bottom > topClearance
   );
 }
 
@@ -34,29 +34,33 @@ export default function FocusFormButton({
         onAfterClick?.();
 
         const section = document.getElementById(sectionId);
-        const root = document.getElementById(formId);
-        const scrollTarget = (root ?? section) as HTMLElement | null;
+        const form = document.getElementById(formId);
+        // Scroll to the section so the heading isn't clipped under the sticky nav.
+        // Attention highlight still targets the form card.
+        const scrollTarget = (section ?? form) as HTMLElement | null;
+        const attentionTarget = (form ?? section) as HTMLElement | null;
         const alreadyVisible = Boolean(
           scrollTarget && isComfortablyInView(scrollTarget),
         );
 
         if (scrollTarget) {
           if (alreadyVisible) {
-            // One-time slight nudge from the top of the page only.
             if (window.scrollY < 20) {
               window.scrollTo({ top: 40, behavior: "smooth" });
             }
           } else {
             scrollTarget.scrollIntoView({
               behavior: "smooth",
-              block: "center",
+              block: "start",
             });
           }
+        }
 
-          scrollTarget.classList.remove("is-attention");
-          void scrollTarget.offsetWidth;
-          scrollTarget.classList.add("is-attention");
-          window.setTimeout(() => scrollTarget.classList.remove("is-attention"), 1800);
+        if (attentionTarget) {
+          attentionTarget.classList.remove("is-attention");
+          void attentionTarget.offsetWidth;
+          attentionTarget.classList.add("is-attention");
+          window.setTimeout(() => attentionTarget.classList.remove("is-attention"), 1800);
         }
       }}
     >

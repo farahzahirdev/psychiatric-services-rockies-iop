@@ -5,7 +5,7 @@ import { FINAL_CTA_ID, IMAGES, PHONE_HREF, PHONE_NUMBER } from "@/lib/constants"
 
 export default function FinalCta() {
   return (
-    <section id={FINAL_CTA_ID} className="final-cta scroll-mt-24" aria-labelledby="final-cta-heading">
+    <section id={FINAL_CTA_ID} className="final-cta scroll-mt-28 md:scroll-mt-24" aria-labelledby="final-cta-heading">
       <ParallaxBg
         src={IMAGES.connection}
         alt="Psychiatric Services of the Rockies Fort Collins office exterior"
