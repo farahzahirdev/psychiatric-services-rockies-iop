@@ -26,6 +26,17 @@ export const FIT_SECTION_ID = "who-its-for";
 export const APPROACH_SECTION_ID = "approach";
 export const FAQ_SECTION_ID = "faq";
 
+/** GHL "Gen Psych - Patient Inquiry" form embed */
+export const GHL_FORM = {
+  id: "3nzZ5tLz1y1783JfTnfU",
+  name: "Gen Psych - Patient Inquiry",
+  title: "Gen Psych - Patient Inquiry",
+  height: 714,
+  get src() {
+    return `https://go.4tms.com/widget/form/${this.id}`;
+  },
+} as const;
+
 export const PHONE_NUMBER = "(970) 436-4449";
 export const PHONE_HREF = "tel:+19704364449";
 

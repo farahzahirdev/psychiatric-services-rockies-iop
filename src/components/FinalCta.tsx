@@ -1,5 +1,5 @@
 import FocusFormButton from "@/components/FocusFormButton";
-import LeadForm from "@/components/LeadForm";
+import GhlLeadForm from "@/components/GhlLeadForm";
 import ParallaxBg from "@/components/ParallaxBg";
 import { FINAL_CTA_ID, IMAGES, PHONE_HREF, PHONE_NUMBER } from "@/lib/constants";
 
@@ -35,8 +35,11 @@ export default function FinalCta() {
             </div>
           </div>
 
-          <div id="final-lead-form" className="final-cta-form-anchor">
-            <LeadForm id="final-lead-form-fields" variant="panel" />
+          <div className="final-cta-form-anchor">
+            <GhlLeadForm
+              id="final-lead-form"
+              iframeId="inline-3nzZ5tLz1y1783JfTnfU-final"
+            />
           </div>
         </div>
       </div>

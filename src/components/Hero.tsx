@@ -1,5 +1,5 @@
 import Image from "next/image";
-import LeadForm from "@/components/LeadForm";
+import GhlLeadForm from "@/components/GhlLeadForm";
 import {
   ABOUT_SECTION_ID,
   FORM_SECTION_ID,
@@ -53,7 +53,10 @@ export default function Hero() {
                 </div>
 
                 <div className="psr-hero-form-wrap psr-fade-up" style={{ animationDelay: "120ms" }}>
-                  <LeadForm id="hero-lead-form" variant="panel" />
+                  <GhlLeadForm
+                    id="hero-lead-form"
+                    iframeId="inline-3nzZ5tLz1y1783JfTnfU-hero"
+                  />
                 </div>
               </div>
             </div>

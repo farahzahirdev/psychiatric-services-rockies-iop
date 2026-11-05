@@ -35,13 +35,7 @@ export default function FocusFormButton({
 
         const section = document.getElementById(sectionId);
         const root = document.getElementById(formId);
-        const form =
-          root?.matches("form") ? root : root?.querySelector("form") ?? root;
-        const input = root?.querySelector<HTMLInputElement>(
-          "input:not([type='checkbox']):not([type='hidden'])",
-        );
-
-        const scrollTarget = (input ?? form ?? root ?? section) as HTMLElement | null;
+        const scrollTarget = (root ?? section) as HTMLElement | null;
         const alreadyVisible = Boolean(
           scrollTarget && isComfortablyInView(scrollTarget),
         );
@@ -49,7 +43,6 @@ export default function FocusFormButton({
         if (scrollTarget) {
           if (alreadyVisible) {
             // One-time slight nudge from the top of the page only.
-            // Do not keep scrolling further on every click.
             if (window.scrollY < 20) {
               window.scrollTo({ top: 40, behavior: "smooth" });
             }
@@ -59,21 +52,12 @@ export default function FocusFormButton({
               block: "center",
             });
           }
-        }
 
-        if (form) {
-          form.classList.remove("is-attention");
-          void (form as HTMLElement).offsetWidth;
-          form.classList.add("is-attention");
-          window.setTimeout(() => form.classList.remove("is-attention"), 1800);
+          scrollTarget.classList.remove("is-attention");
+          void scrollTarget.offsetWidth;
+          scrollTarget.classList.add("is-attention");
+          window.setTimeout(() => scrollTarget.classList.remove("is-attention"), 1800);
         }
-
-        window.setTimeout(
-          () => {
-            input?.focus({ preventScroll: true });
-          },
-          alreadyVisible ? 220 : 450,
-        );
       }}
     >
       {children}
